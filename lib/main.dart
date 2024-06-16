@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:runner_g/navigation/routes.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const App());
 }
 
 class App extends StatelessWidget {
   const App({super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
+    FlutterNativeSplash.remove();
+
     return const MaterialApp(
       home: SplashScreen(),
     );
@@ -18,10 +22,8 @@ class App extends StatelessWidget {
 
 class SplashScreen extends StatefulWidget {
   static MaterialPage page() {
-    return MaterialPage(
-      name: Routes.splashPath,
-      key: ValueKey(Routes.splashPath),
-      child: const SplashScreen(),
+    return const MaterialPage(
+      child: SplashScreen(),
     );
   }
 
@@ -40,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/icon.png',
+              'assets/icon/icon.png',
               width: 72,
             ),
             Text(

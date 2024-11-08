@@ -36,8 +36,13 @@ class App extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontSize: 14),
+          bodyLarge: TextStyle(fontSize: 16),
+        ),
       ),
       home: session != null ? const HomeScreen() : const LoginScreen(),
     );
   }
 }
+

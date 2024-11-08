@@ -63,17 +63,56 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenHeight = screenSize.height;
+    final double screenWidth = screenSize.width;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            await _googleSignIn();
-          },
-          child: const Text('Login with Google'),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Image(
+            image: AssetImage('assets/icon/icon.png'),
+            height: 200.0,
+            width: 200.0,
+          ),
+          SizedBox(height: screenHeight*0.075),
+          Text(
+            '처음 오셨나요? 바로 회원가입하고 시작하세요.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          Text(
+            '다양한 사람들과 함께 러닝 기록을 공유해보세요.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          SizedBox(height: screenHeight*0.16),
+          Center(child: LayoutBuilder(
+            builder: (context, constraints) {
+              return FractionallySizedBox(
+                widthFactor: 0.9, // 너비를 화면의 90%로 설정
+                child: ElevatedButton(
+                  onPressed: _googleSignIn,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(48, 50), // 너비는 부모 크기만큼, 높이는 60으로 설정
+                    backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)
+                    )
+                  ),
+                  child: const Text(
+                    '접속하기',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16
+                    ),
+                  ),
+                ));
+            },
+          )),
+          SizedBox(height: screenHeight*0.075),
+        ],
       ),
     );
   }
